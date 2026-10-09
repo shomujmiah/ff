@@ -5,57 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Fantasy Premier League</title>
   
-  <!-- PWA Manifest Link -->
   <link rel="manifest" href="manifest.json">
-  
-  <!-- Apple Touch & Mobile Icons -->
   <link rel="apple-touch-icon" href="IMG_9596.jpeg">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="FPL">
-  
-  <!-- Standard Favicon -->
   <link rel="icon" type="image/png" href="IMG_9596.jpeg">
   
-  <!-- OneSignal SDK Integration (Corrected script loader URL) -->
+  <!-- OneSignal SDK Integration -->
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     window.OneSignalDeferred.push(async function(OneSignal) {
-      await OneSignal.init({
-        appId: "4d1e2989-a304-468b-9a77-7fef97ade3c6",
-      });
-
-      // Automatically trigger the subscription slidedown prompt
       try {
-        if (!OneSignal.User.PushSubscription.optedIn) {
+        await OneSignal.init({
+          appId: "4d1e2989-a304-468b-9a77-7fef97ade3c6",
+        });
+        console.log("DIAGNOSTIC: OneSignal Initialized Successfully!");
+
+        // Check subscription status
+        const isOptedIn = OneSignal.User.PushSubscription.optedIn;
+        console.log("DIAGNOSTIC: User opted in status:", isOptedIn);
+
+        if (!isOptedIn) {
+          // Force prompt display for diagnostics
           await OneSignal.Slidedown.promptPush();
         }
-      } catch (e) {
-        console.log("OneSignal prompt error:", e);
+      } catch (error) {
+        console.error("DIAGNOSTIC: OneSignal Initialization Failed:", error);
       }
     });
   </script>
 
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background-color: #fdfbf7;
+      margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #fdfbf7;
     }
     iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
+      width: 100%; height: 100%; border: none; display: block;
     }
   </style>
 </head>
 <body>
-  <!-- Added allow attributes so notification permissions can pass through the iframe if needed -->
-  <iframe src="https://script.google.com/macros/s/AKfycbyY1TyrolRIz73nLKqdrAoTNHnNnHkSCTwIH6LRqREv7dRnqucvMoqdXx0ROdL-g82o0w/exec" allow="notifications; geolocation; microphone; camera"></iframe>
+  <iframe src="https://script.google.com/macros/s/AKfycbyY1TyrolRIz73nLKqdrAoTNHnNnHkSCTwIH6LRqREv7dRnqucvMoqdXx0ROdL-g82o0w/exec" allow="notifications; push; geolocation"></iframe>
 </body>
 </html>
