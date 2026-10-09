@@ -8,14 +8,25 @@
   <!-- PWA Manifest Link -->
   <link rel="manifest" href="manifest.json">
   
-  <!-- Apple Touch & Mobile Icons (for iOS home screen shortcuts) -->
+  <!-- Apple Touch & Mobile Icons -->
   <link rel="apple-touch-icon" href="IMG_9596.jpeg">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="FPL">
-
+  
   <!-- Standard Favicon -->
   <link rel="icon" type="image/png" href="IMG_9596.jpeg">
+  
+  <!-- OneSignal SDK Integration -->
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    window.OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "YOUR_ONESIGNAL_APP_ID", // Replace with your actual OneSignal App ID
+      });
+    });
+  </script>
 
   <style>
     html, body {
@@ -35,6 +46,6 @@
   </style>
 </head>
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbyY1TyrolRIz73nLKqdrAoTNHnNnHkSCTwIH6LRqREv7dRnqucvMoqdXx0ROdL-g82o0w/exec"></iframe>
+  <iframe src="https://script.google.com/macros/s/AKfycbvY1TyrolRiZ73nLkQdrAoTNHNnnHkSCTWiH6LRQReV7dRnquvMoqdXxO8RoDl-g82o0w/exec"></iframe>
 </body>
 </html>
